@@ -1,0 +1,37 @@
+import bs4
+
+import requests
+
+
+res = requests.get("https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off")
+
+sam = requests.get("https://www.flipkart.com/mobiles/~samsung-galaxy-s10/pr?sid=tyy,4io&otracker=sp_browse_announcement_search.flipkart.com")
+
+type(res)
+
+
+
+soup = bs4.BeautifulSoup(res.text, 'lxml')
+
+iphone_list =[(i.text,j.text) for i in soup.select("._3wU53n") for j in soup.select(".niH0FQ")]
+
+#for i in  soup.select("._3wU53n"): 
+  #  for j in soup.select(".niH0FQ"):
+   #     print(i.text,j.text)
+
+soup = bs4.BeautifulSoup(sam.text, 'lxml')
+
+samsung_list = [(i.text,j.text) for i in soup.select("._3wU53n") for j in soup.select(".niH0FQ")]
+
+#for i in soup.select("._3wU53n"):
+    #for j in soup.select(".niH0FQ"):
+        
+        #iphone_list= [()]
+    len(iphone_list)
+    len(samsung_list)
+    import pandas as pd
+df1 = pd.DataFrame(iphone_array)
+df2 = pd.DataFrame(samsung_array)
+df1.columns =["Name","Reviews"]
+df2.columns=['Name','Reviews']
+df1.to_csv('iphone List.csv', encoding='utf-8', index=False
